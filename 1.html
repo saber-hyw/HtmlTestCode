@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>RunJS</title>
+        <style>
+            #progress{
+                border:1px solid black;
+                width:500px;
+                height:20px; 
+                text-align:center;
+            }
+            #progress>div{
+                width:0px;
+                height:20px;
+                position:absolute;
+                background-color:yellow;
+            }
+            #progress>span{
+                color:red;
+                position:absolute;
+            }
+        </style>
+        <script type="text/javascript">
+            onload = function(){
+                var div = progress.querySelector("div");
+                var span = progress.querySelector("span");
+                var pw = parseFloat(progress.style.width) || parseFloat(getComputedStyle(progress).width) || progress.offsetWidth;
+                var interval = setInterval(function(){
+                    var w = parseFloat(div.style.width) || parseFloat(getComputedStyle(div).width) || div.offsetWidth;
+                    w+=10;
+                    if(w>=pw){
+                        w = pw;
+                        clearInterval(interval);
+                    }
+                    div.style.width = w + "px";
+                    span.innerHTML = w*100/pw + "%";
+                },60);
+            };
+</script>
+    </head>
+    <body> 
+         <div id="progress">
+             <div>
+                  
+             </div>
+             <span></span>
+        </div>
+    </body>
+</html>

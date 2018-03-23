@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+    <link href="circular_bead.css" rel="stylesheet">
+
+
+    <style type="text/CSS">
+        .roundedRectangle {
+            background: white;
+            border-width: 1px; /* 四周边框边距的宽度 */
+            border-style: solid; /* 设置边框的样式是实线 */
+            border-radius: 8px; /* 圆角的大小 */
+            border-color: blue blue blue blue; /*边框颜色，依次为上、右、下、左*/
+        }
+
+          
+        .roundedRectangle p {
+            margin: 0px auto;
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            letter-spacing: 8px;
+        }
+
+    </style> 
+
+</head>
+<body>
+<p>
+ <a class="b" href="#" onclick="test();">点击去掉该链接的onclick属性，3秒后再自动加上该onclick属性</a>
+</p>
+
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript">
+$(function(){
+ $(".b").click(function(){
+  $(this).removeAttr("onclick");
+  setTimeout(function(){
+   $(".b").attr("onclick","test();");
+   },3000)
+  })
+ })
+function test(){}
+</script>
+</body>
+</html>

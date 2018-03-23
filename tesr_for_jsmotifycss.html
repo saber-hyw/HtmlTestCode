@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Js motify CSS,Four methods</title>
+
+  <style>
+    .style1{margin:10px auto ;background-color:#9999FF; display:block;color:White; border:1px solid white; padding:10px 25px; font-size:18px; }
+ 
+    .style1:hover{ background-color:#66B3FF; cursor:pointer;}
+  
+    .style2{margin:10px auto ;background-color:yellow; display:block;color:black; border:1px solid white; padding:10px 25px; font-size:18px; }
+  
+    .style2:hover{ background-color:skyblue; color:White; cursor:pointer}
+  </style>     
+
+</head>
+<body>
+        <div>
+            <input id="btnB" type="button" name="btnLogin" value="登录" class="style1" />
+            <div id="tool">
+                <input type="button" value="【obj.style.className】更改样式" onclick="changeStyle1()"/>
+                <input type="button" value="【obj.style.cssText】更改样式" onclick="changeStyle2()" />
+                <input type="button" value="【obj.className】更改样式" onclick="changeStyle3()" />
+                <input type="button" value="更改外联css样式" onclick="changeStyle4()" />
+            </div>
+        </div>
+</body>
+
+<script>
+    function changeStyle1() {
+        var obj = document.getElementById("btnB");
+        obj.style.backgroundColor = "black";
+        console.log("change style 1");
+    }
+    function changeStyle2() {
+        var obj = document.getElementById("btnB");
+        obj.style.cssText = "background-color:black; display:block;color:White;";
+        console.log("change style 2");
+    }
+    function changeStyle3() {
+        var obj = document.getElementById("btnB");
+        //obj.className = "style2";
+        obj.setAttribute("class", "style2");
+        console.log("change style 3");
+    }
+    // <link href="css1.css" rel="stylesheet" type="text/css" id="css"/>
+    function changeStyle4() {
+        var obj = document.getElementById("css");
+        obj.setAttribute("href","css2.css");
+        console.log("change style 4");
+    }
+</script>
+
+</html>

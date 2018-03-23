@@ -1,0 +1,58 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="showmessage">
+</div>
+<script>
+    var ws = new WebSocket('ws://localhost:8888');
+    // ws.binaryType = "blob";
+    ws.onopen = function() {
+        console.log("trigger onopen callback function");
+        var debug = {hello:"world"}; // json
+        var blob = new Blob([JSON.stringify(debug,null,2)],{type:"aplication/json"});
+        console.log("create blob data ="+blob);  // log is 'create blob data =[object Blob]'; blob的数据格式是打印不出来的；
+        ws.send(blob);
+    }
+    ws.onmessage = function(message) {
+        console.log("trigger onmessage callback function");
+        var serverData = new Uint8Array(message.data);
+        document.getElementById('showmessage').innerHTML = serverData;
+
+        // the only way to read content from a Blob is to use 'FileReader';
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(blob);
+        reader.addEventListener("loadend",function() {
+            console.log("Blob content is: "+reader.result);   // log is : Blob content is: [object ArrayBuffer]
+            var resultView = new Uint8Array(reader.result);
+            console.log("reader.result.View = "+resultView);
+        });
+        // or style,below
+        // reader.onload = function (){}
+
+    }
+    ws.onclose = function() {
+        console.log("trigger onclose callback function");
+    }
+    ws.onerror = function() {
+        console.log("trigger onerror callback function");
+    }
+
+    // if (ws.readyState === WebSocket.OPEN) {
+    //     console.log("websocket open,you can send message!");
+    // }
+    // else {
+    //     console.log("websocket is not ready,can`t send message!");
+    // }   
+    
+    
+    
+    
+    
+</script>
+</body>
+</html>

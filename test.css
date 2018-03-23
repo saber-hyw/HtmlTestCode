@@ -1,0 +1,165 @@
+CSS
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+p {
+    font-size: 20px;
+    text-align: center;
+}
+
+#container {
+    margin: 0px;
+    padding: 0px;
+    background: red;
+    position: absoult;
+    height:738px;
+}
+
+#top {
+    
+    margin-top: auto;
+    border-top: 1px;
+    padding-top: 1px;
+    height: 33%;
+    padding-bottom: 1px;
+    border-bottom: 1px;
+    margin-bottom: auto;
+    background: blue;
+}
+
+#mid {
+    
+    margin-top: auto;
+    border-top: 1px;
+    padding-top: 1px;
+    height: 33%;
+    padding-bottom: 1px;
+    border-bottom: 1px;
+    margin-bottom: auto;
+    background: yellow;
+}
+
+#bottom {
+    
+    margin-top: auto;
+    border-top: 1px;
+    padding-top: 1px;
+    height: 33%;
+    padding-bottom: 1px;
+    border-bottom: 1px;
+    margin-bottom: auto;
+    background: green;
+}
+
+#topleft {
+    float:left;
+    background: yellow;
+    margin-left: auto;
+    border-left: 1px;
+    padding-left: 1px;
+    width: 33%;
+    padding-right: 1px;
+    border-right: 1px;
+    margin-right: auto;
+    height: 100%;
+    
+}
+#topmid {
+    float:left;
+    background: green;
+    margin-left: auto;
+    border-left: 1px;
+    padding-left: 1px;
+    width: 33%;
+    padding-right: 1px;
+    border-right: 1px;
+    margin-right: auto;
+    height: 100%;
+}
+#topright {
+    float:left;
+    background: red;
+    margin-left: auto;
+    border-left: 1px;
+    padding-left: 1px;
+    width: 33%;
+    padding-right: 1px;
+    border-right: 1px;
+    margin-right: auto;
+    height: 100%;
+}
+#midleft {
+    float:left;
+    background: blue;
+    margin-left: auto;
+    border-left: 1px;
+    padding-left: 1px;
+    width: 33%;
+    padding-right: 1px;
+    border-right: 1px;
+    margin-right: auto;
+    height: 100%;
+}
+#midmid {
+    float:left;
+    background: yellow;
+    margin-left: auto;
+    border-left: 1px;
+    padding-left: 1px;
+    width: 33%;
+    padding-right: 1px;
+    border-right: 1px;
+    margin-right: auto;
+    height: 100%;
+}
+
+#midright {
+    float:left;
+    background: green;
+    margin-left: auto;
+    border-left: 1px;
+    padding-left: 1px;
+    width: 33%;
+    padding-right: 1px;
+    border-right: 1px;
+    margin-right: auto;
+    height: 100%;
+}
+#bottomleft {
+    float:left;
+    background: red;
+    margin-left: auto;
+    border-left: 1px;
+    padding-left: 1px;
+    width: 33%;
+    padding-right: 1px;
+    border-right: 1px;
+    margin-right: auto;
+    height: 100%;
+}
+#bottommid {
+    float:left;
+    background: blue;
+    margin-left: auto;
+    border-left: 1px;
+    padding-left: 1px;
+    width: 33%;
+    padding-right: 1px;
+    border-right: 1px;
+    margin-right: auto;
+    height: 100%;
+}
+#bottomright {
+    float:left;
+    background: yellow;
+    margin-left: auto;
+    border-left: 1px;
+    padding-left: 1px;
+    width: 33%;
+    padding-right: 1px;
+    border-right: 1px;
+    margin-right: auto;
+    height: 100%;
+}

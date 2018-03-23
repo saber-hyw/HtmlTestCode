@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+  var list = [1, 2, 3, 4, 5];
+  var box = document.createElement('div');
+  [1, 2, 3, 4, 5].forEach(function(v) {
+    const ele = document.createElement('div');
+    ele.textContent = v;
+    ele.dataset.index = v;
+    ele.addEventListener('click', function(e) {
+      console.log('你点击了--' + e.target.dataset.index);
+    });
+    box.append(ele);
+  });
+  document.body.append(box);
+</script>
+</html>

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        canvas{
+            background-color: bisque;
+            border: 1px solid deepskyblue;
+        }
+    </style>
+
+</head>
+<body>
+
+    <canvas id="cvs" width="300" height="200" >
+        <p>sorry! Not support canvas in your browser!</p>
+    </canvas>
+
+<script>
+var c=document.getElementById("cvs");
+var ctx=c.getContext("2d");
+ctx.fillRect(10,10,100,50);
+ctx.translate(70,70);
+ctx.fillRect(10,10,100,50);
+
+</script>
+
+</body>
+</html>
