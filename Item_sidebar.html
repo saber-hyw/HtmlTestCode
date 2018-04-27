@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>demo</title>
+  <style>
+    span {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+    <input type="checkbox" accesskey="c" id="check0" />
+    <input type="checkbox" accesskey="c" id="check1" />
+    <input type="checkbox" accesskey="c" id="check2" />
+    <input type="checkbox" accesskey="c" id="check3" />
+    <input type="checkbox" accesskey="c" id="check4" />
+  <input type="text" id="input"/>
+  <button id="button">添加</button>
+  <button id="get">获取数据</button>
+  <div class="showData"></div>
+</body>
+<script>
+  var $ = function(selector) {
+    return document.querySelector(selector);
+  }
+
+  var $$ = function(selector) {
+    return document.querySelectorAll(selector);
+  }
+
+  var getItem = function(value) {
+    var item = document.createElement('li');
+    item.className = 'item';
+    var del = document.createElement('a');
+    del.href = '#';
+    del.className = 'delete';
+    del.textContent = '删除';
+    item.dataset.value = item.textContent = value;
+    item.appendChild(del);
+    return item;
+  }
+
+  var btn = $('#button');
+  var getBtn = $('#get');
+  var showData = $('.showData');
+  var testArr = ['aa', 'bb', 'cc', 'dd'];
+  var box = document.createElement('ul');
+  testArr.forEach(v => {
+    var item = getItem(v);
+    box.appendChild(item);
+  });
+  document.body.appendChild(box);
+
+  btn.addEventListener('click', function(event) {
+    var addValue = $('#input').value;
+    if (addValue) {
+      var newItem = getItem(addValue);
+      box.appendChild(newItem);
+      $('#input').value = '';
+    }
+  });
+
+  box.addEventListener('click', function(event) {
+    var el = event.target;
+    if (el.className === 'delete') {
+      el.parentElement.remove();
+    }
+  });
+
+  getBtn.addEventListener('click', function() {
+    showData.textContent = Array.from($$('.item')).map(item => item.dataset.value);
+  });
+</script>
+</html>
