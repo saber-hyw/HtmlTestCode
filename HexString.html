@@ -1,0 +1,51 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+    </style>
+
+</head>
+<body>
+
+<script>
+    // Convert the string to hexadecimal.
+    function stringToHex(str){
+        var val="";
+        for(var i = 0; i < str.length; i++){
+            if(val == "")
+                val = str.charCodeAt(i).toString(16);
+            else
+                val += "," + str.charCodeAt(i).toString(16);
+        }
+        return val;
+　　}
+
+    var strTest = 'abcde';
+    stringToHex(strTest);
+    console.log("abcde to hex: "+stringToHex(strTest));
+
+
+    // Convert the hexadecimal to string.
+    function hexToString(str) {
+        var val = "";
+        for(var i = 0; i < str.length; i++) {
+            val += String.fromCharCode(str[i]);  // every hex to ASCII
+        }
+        return val;
+　　}
+
+    // test function
+    var hexTest = [0x30,0x30,0x30,0x2e,0x30,0x30,0x31,0x2e,0x30,0x30,0x30,0x2f,0x30,0x30,0x30,0x2e,0x30,0x30,0x32,0x2e,0x30,0x30,0x30,0x2f,0x2d,0x2d,0x2d,0x2e,0x2d,0x2d,0x2d,0x2e,0x2d,0x2d,0x2d];
+    hexToString(hexTest);
+    console.log("Hex to string: "+hexToString(hexTest));
+    // test
+    console.log(String.fromCharCode(0x30,0x30,0x30,0x2e,0x30,0x30,0x31,0x2e,0x30,0x30,0x30,0x2f,0x30,0x30,0x30,0x2e,0x30,0x30,0x32,0x2e,0x30,0x30,0x30,0x2f,0x2d,0x2d,0x2d,0x2e,0x2d,0x2d,0x2d,0x2e,0x2d,0x2d,0x2d));
+
+</script>
+
+</body>
+</html>
