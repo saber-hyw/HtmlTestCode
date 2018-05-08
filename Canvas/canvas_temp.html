@@ -1,0 +1,247 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>canvas_06.html</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <style>  
+        .div{
+        width: 200px;
+        height: 300px;
+        background: red;
+        }
+        .boack{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 1000px;
+        height: 400px;
+        }
+  </style>
+
+<body>
+<div>
+    <div class="boack">
+    <canvas id="background" width="1000" height="400"></canvas>
+    </div>
+    <div class="boack">
+    <canvas id="line" width="1000" height="400"></canvas>
+    </div>
+    <div class="boack" id = "div">
+    <canvas id="station" width="1000" height="400"></canvas>
+    </div>
+
+    <script>
+        var canvas = null;
+        var canvasline = null;
+        var stationCanvas = null;
+        var ctx = null;
+        var linectx = null;
+        var stationCtx = null;
+
+        var width = 0; //canvas 的宽
+        var height = 0;//canvas 的高
+
+        var xMin = 0; //X轴的最小标记坐标
+        var xMax = 0; //X轴的最大标记坐标
+        var xPx = 0;  //X轴的像素
+
+        var yMax = 0; //Y轴的最大标记坐标
+        var yMin = 0; //Y轴的最小标记坐标
+        var yPx = 0; //Y轴的像素
+
+
+        var vMax = 108;//标注最大值
+        var vMin = 88;//标注最小值
+
+        var downx = 0;
+        var downy = 0;
+        var upx = 0;
+        var upy = 0;
+
+        var setp = 0;//画线的步长
+        var ana = 5; //将X 分成几份
+        var border = 20; // 外边框
+
+        var vSetp = 0;
+
+        var json = null;
+
+        var index = 0;
+        var indexEnd = 0;
+        var length = 0;
+
+
+
+        window.onload = function(){
+        json = [{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},
+            {y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},
+            {y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},
+            {y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},
+            {y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},{y:100},{y:200},
+        ];
+        length = json.length;
+        indexEnd =  length-1;
+        canvas = document.getElementByIdx_x("background");
+        canvasline = document.getElementByIdx_x("line");
+        stationCanvas = document.getElementByIdx_x("station");
+        width = canvas.width;
+        height = canvas.height;
+        yMin = 20;
+        yMax = height-border;
+        yPx = yMax - yMin;
+        xMax = width - border;
+        xMin = 20;
+        xPx = xMax - xMin;
+        setp = xPx/ana;
+        ctx = canvas.getContext("2d");
+        linectx = canvasline.getContext("2d");
+        stationCtx = stationCanvas.getContext("2d");
+        set(vMax,vMin);
+        for(var i = 0; i<=200;i++){
+        }
+        };
+
+        function set(vmax,vmin){//重置 vMax 和 vMin  
+        vMax = vmax;
+        vMin = vmin;
+        vSetp = (vMax - vMin)/ana;
+        draw();
+        drawStation();
+        drawLine();
+        }
+        function drawStation(){
+        var div = document.getElementByIdx_x("div");
+        div.onmousedown = function (ev){
+        stationCtx.save();
+        downx = ev.clientX-7;
+        downy = ev.clientY;
+        stationCtx.strokeStyle = "red";
+        stationCtx.beginPath();
+        stationCtx.moveTo(downx,yMin);
+        stationCtx.lineTo(downx,yMax);
+        stationCtx.closePath();
+        stationCtx.stroke();
+        stationCtx.restore();
+        };
+        div.onmouseup = function (ev){
+        stationCtx.save();
+        upx = ev.clientX-7;
+        upy = ev.clientY;
+        stationCtx.strokeStyle = "red";
+        stationCtx.beginPath();
+        stationCtx.moveTo(upx,yMin);
+        stationCtx.lineTo(upx,yMax);
+        stationCtx.closePath();
+        stationCtx.stroke();
+        stationCtx.restore();
+        if (upx == downx) {
+        return;
+        }else if (upx > downx) {
+        amplification(downx,upx);
+        }else {
+        reduce(downx,upx);
+        }
+        };
+        }
+        function drawLine(){
+        linectx.clearRect(0,0,width,height);
+        stationCtx.clearRect(0,0,width,height);
+        linectx.save();
+        linectx.strokeStyle = "white";
+        linectx.beginPath();
+        var a = 0;
+        for (var i = index; i <= indexEnd;i++ ) {
+        var x1 = a*(xMax - xMin)/(indexEnd -index) +border;
+        var x2 = (a+1)*(xMax - xMin)/(indexEnd -index)+border;
+        linectx.moveTo(x1,json[i].y);
+        linectx.lineTo(x2,json[i+1].y);
+        linectx.closePath();
+        linectx.stroke();
+        a++;
+        }
+        linectx.restore();
+        }
+        function draw(){
+
+        ctx.fillRect(0,0,width,height);
+        ctx.save();
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(border,border,width-border*2,height-border*2);
+        ctx.restore();
+        ctx.save();
+        ctx.strokeStyle = "green";
+        ctx.beginPath();
+        for ( var i = 1; i < ana ; i++) {
+        ctx.moveTo(xMin+setp*i,yMin);
+        ctx.lineTo(xMin+setp*i,yMax);
+        }
+        ctx.closePath();
+        ctx.fillRect(xMin-1,yMax+1,xMax+20, 10);
+        for ( var i = 0; i <=ana; i++) {
+        var value = vMin + vSetp*i;
+        var x = (value - vMin)*xPx / (vMax - vMin);
+        ctx.strokeText( value.toFixed(2),x,yMax+10);
+        }
+        ctx.stroke();
+        ctx.restore();
+        }
+
+        function amplification(downx,upx){ //计算变换以后的vMax 和 Vmin 的值
+
+        var vmin = (downx - xMin)/((xMax - xMin)/(vMax - vMin)) + vMin;
+        var vmax = (upx-xMin)/((xMax - xMin)/(vMax - vMin)) + vMin;
+        var i = downx/((xMax - xMin)/length) - 1;
+        index =parseInt(i);
+        var ied = upx/((xMax - xMin)/length) - 1;
+        indexEnd = parseInt(ied);
+        // alert(indexEnd);
+        length = indexEnd - index;
+        set(vmax,vmin);
+        }
+        function reduce(downx,upx){
+        length = json.length;
+        indexEnd =  length-1;
+        var vmin = 88;
+        var vmax = 108;
+
+        set(vmax,vmin);
+        }
+        } 
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        canvas{
+            background-color: bisque;
+            border: 1px solid deepskyblue;
+        }
+    </style>
+
+</head>
+<body>
+
+    <canvas id="cvs" width="300" height="200" >
+        <p>sorry! Not support canvas in your browser!</p>
+    </canvas>
+
+
+
+</body>
+</html>
